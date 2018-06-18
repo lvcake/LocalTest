@@ -1,0 +1,27 @@
+# https://leetcode.com/problems/unique-morse-code-words/description/
+# 804. Unique Morse Code Words
+
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+        String[] morseCode = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        String[] words = {"gin", "zen", "gig", "msg"};
+        String tmp = "";
+        for(int i = 0; i < words.length; i++){
+
+            String word = words[i];
+            for(int j = 0; j < word.length(); j++){
+                tmp += morseCode[word.charAt(j)-'a'];
+            }
+        }
+        System.out.println(tmp);
+
+    }
+}
+
+
+
+
