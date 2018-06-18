@@ -3,24 +3,40 @@
 
 package com.company;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
         // write your code here
         String[] morseCode = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
         String[] words = {"gin", "zen", "gig", "msg"};
-        String tmp = "";
+        List<String> result = new ArrayList<>();
         for(int i = 0; i < words.length; i++){
-
+            String tmp = "";
             String word = words[i];
             for(int j = 0; j < word.length(); j++){
                 tmp += morseCode[word.charAt(j)-'a'];
+
+            }
+            result.add(tmp);
+        }
+
+        for(int m = 0; m < result.size(); m++){
+            for(int n = result.size()-1; n >m; n--){
+                if (result.get(m).equals(result.get(n))){
+                    result.remove(n);
+                }
             }
         }
-        System.out.println(tmp);
+
+        System.out.println(result.size());
 
     }
 }
+
+
 
 
 
