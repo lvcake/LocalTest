@@ -1,25 +1,26 @@
-# 804. Unique Morse Code Words
-# https://leetcode.com/problems/unique-morse-code-words/description/
+# 728.Self Dividing Numbers
+# https://leetcode.com/problems/self-dividing-numbers/description/
 
 class Solution {
-    private static String fun(String s) {
-        StringBuilder S = new StringBuilder(s);
-        StringBuilder res=new StringBuilder();
-        for(int i=0;i<S.length();i++)
-        {
-            if(S.charAt(i)=='#')
-            {
-                if(res.length()>0)
-                {
-                    res.deleteCharAt(res.length()-1);
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        boolean success = true;
+        List<Integer> result = new ArrayList<>();
+        for(int i=left; i<=right; i++){
+            int num = i;
+            success = true;
+            while(num!=0){
+                int remainder = num %10;
+                if(remainder == 0 || i % remainder !=0){
+                    success = false;
+                    break;
                 }
+                num/=10;
             }
-            else
-                res.append(S.charAt(i));
+            if(success){
+                result.add(i);
+            }
         }
-        return res.toString();
-    }
-    public boolean backspaceCompare(String S, String T) {
-        return (fun(S).equals(fun(T)));
+
+        return result;
     }
 }
