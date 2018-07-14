@@ -1,25 +1,17 @@
-# 804. Unique Morse Code Words
-# https://leetcode.com/problems/unique-morse-code-words/description/
+# 561.Array Partition I
+# https://leetcode.com/problems/array-partition-i/description/
 
-class Solution {
-    private static String fun(String s) {
-        StringBuilder S = new StringBuilder(s);
-        StringBuilder res=new StringBuilder();
-        for(int i=0;i<S.length();i++)
-        {
-            if(S.charAt(i)=='#')
-            {
-                if(res.length()>0)
-                {
-                    res.deleteCharAt(res.length()-1);
-                }
-            }
-            else
-                res.append(S.charAt(i));
+public class Main {
+    private static int arrayPairSum(int[] nums){
+        Arrays.sort(nums);
+        int sum = 0;
+        for(int i = 0; i<nums.length; i+=2){
+            sum = sum + nums[i];
         }
-        return res.toString();
+        return sum;
     }
-    public boolean backspaceCompare(String S, String T) {
-        return (fun(S).equals(fun(T)));
+    public static void main(String[] args){
+        int[] A = new int[]{1,4,3,2};
+        System.out.println(arrayPairSum(A));
     }
 }
