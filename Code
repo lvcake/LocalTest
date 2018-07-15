@@ -1,25 +1,44 @@
-# 804. Unique Morse Code Words
-# https://leetcode.com/problems/unique-morse-code-words/description/
+# 807.Max Increase to Keep City Skyline
+# https://leetcode.com/problems/max-increase-to-keep-city-skyline/description/
 
-class Solution {
-    private static String fun(String s) {
-        StringBuilder S = new StringBuilder(s);
-        StringBuilder res=new StringBuilder();
-        for(int i=0;i<S.length();i++)
-        {
-            if(S.charAt(i)=='#')
-            {
-                if(res.length()>0)
-                {
-                    res.deleteCharAt(res.length()-1);
+public class Main {
+
+    private static int maxIncreaseKeepingSkyline(int[][] grid) {
+        int sum = 0;
+        int increase = 0;
+        int[] maxTB = new int[grid[0].length];
+        int[] maxLR = new int[grid.length];
+
+        for(int i=0; i<grid.length; i++){
+            maxLR[i] = grid[i][0];
+            for(int j=0; j<grid[0].length; j++){
+                if(grid[i][j]>maxLR[i]){
+                    maxLR[i] = grid[i][j];
                 }
             }
-            else
-                res.append(S.charAt(i));
         }
-        return res.toString();
+        for(int j=0; j<grid[0].length; j++){
+            maxTB[j] = grid[0][j];
+            for(int i=0; i<grid.length; i++){
+                if(grid[i][j]>maxTB[j]){
+                    maxTB[j] = grid[i][j];
+                }
+            }
+        }
+        for(int i=0; i<grid.length; i++){
+            for(int j=0; j<grid[0].length; j++){
+                increase = Math.min(maxTB[j], maxLR[i]) - grid[i][j];
+                sum = sum + increase;
+            }
+        }
+        return sum;
     }
-    public boolean backspaceCompare(String S, String T) {
-        return (fun(S).equals(fun(T)));
+
+    public static void main(String[] args){
+        int[][] A =new int[][]{{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}};
+        System.out.println(maxIncreaseKeepingSkyline(A));
+        int[][] B =new int[][]{{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0},{9,9,9,9}};
+        System.out.println(maxIncreaseKeepingSkyline(B));
+
     }
 }
