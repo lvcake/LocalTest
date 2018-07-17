@@ -1,25 +1,57 @@
-# 804. Unique Morse Code Words
-# https://leetcode.com/problems/unique-morse-code-words/description/
+# 868.Binary Gap
+# https://leetcode.com/problems/binary-gap/description/
+public class Main {
 
-class Solution {
-    private static String fun(String s) {
-        StringBuilder S = new StringBuilder(s);
-        StringBuilder res=new StringBuilder();
-        for(int i=0;i<S.length();i++)
-        {
-            if(S.charAt(i)=='#')
-            {
-                if(res.length()>0)
-                {
-                    res.deleteCharAt(res.length()-1);
+    private static int binaryGap(int N) {
+        String binary_N = Integer.toBinaryString(N);
+        int[] dist = new int[binary_N.length()];
+        int distance;
+        dist[0] = 1;
+        int numofone = 1;
+        for(int i=1; i<binary_N.length(); i++){
+            if(binary_N.charAt(i)=='1'){
+                dist[i]=i;
+                numofone++;
+            }else if(binary_N.charAt(i)=='0'){
+                dist[i]=0;
+            }
+        }
+
+        int[] new_dist = new int[numofone];
+        int j = 0;
+        for(int i = 0; i<dist.length; i++){
+            if(dist[i]!=0){
+                new_dist[j] = dist[i];
+                j++;
+            }
+        }
+        int[] result = new int[new_dist.length];
+        int m = 0;
+        if(new_dist.length > 1){
+
+            new_dist[0]=0;
+            for(int i=1; i<new_dist.length; i++){
+                result[i] = new_dist[i]-new_dist[i-1];
+            }
+            int big = result[0];
+            for(int i=1; i<result.length; i++){
+                if(result[i]>big){
+                    big = result[i];
                 }
             }
-            else
-                res.append(S.charAt(i));
+            distance = big;
+        }else{
+            distance = 0;
         }
-        return res.toString();
+
+        return distance;
     }
-    public boolean backspaceCompare(String S, String T) {
-        return (fun(S).equals(fun(T)));
+
+    public static void main(String[] args){
+        int A =22;
+        System.out.println(binaryGap(A));
+        int B =8;
+        System.out.println(binaryGap(B));
+
     }
 }
